@@ -2,7 +2,12 @@
 const express = require('express');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
+const db = require('./config/db');
 const app = express();
+const routes = require('./src/routes');
+
+db.initDB();
+db.testConnection();
 
 app.use(morgan('dev', {
 	skip: function (req, res) { return res.statusCode > 400 }
@@ -23,6 +28,8 @@ app.use((req, res, next) => {
 	}
 	next(); // Go to next middleware
 });
+
+app.use(routes);
 
 app.use((req, res, next) => {
 	const error = new Error('No route was found for this request!');
