@@ -1,10 +1,11 @@
 const { Sequelize } = require('sequelize');
-
+const fs = require('fs');
+const path = require('path');
 
 let sequelizeInstance;
 
 const getSequelize = () => {
-  return this.sequelizeInstance;
+  return sequelizeInstance;
 }
 
 const initDB = () =>{
@@ -16,7 +17,7 @@ const initDB = () =>{
 
     const conString = `postgres://${username}:${password}@${host}:${port}/${databaseName}`;
     // with URI
-    this.sequelizeInstance = new Sequelize(conString);
+    sequelizeInstance = new Sequelize(conString);
 }
 
 const testConnection = async () => {
@@ -26,6 +27,15 @@ const testConnection = async () => {
     } catch (error) {
       console.error("Unable to connect to the database:", error);
     }
-  };
+};
 
-  module.exports = {initDB, testConnection, getSequelize};
+const setup = () => {
+  const filePath = path.resolve(__dirname,'../sql/01_CREATE_TABLES.sql');
+  const sql_string = fs.readFileSync(filePath, 'utf8');
+  getSequelize().query(sql_string);
+}
+
+initDB();
+setup();
+
+module.exports = { testConnection, getSequelize};

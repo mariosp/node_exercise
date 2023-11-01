@@ -6,7 +6,7 @@ const db = require('./config/db');
 const app = express();
 const routes = require('./src/routes');
 
-db.initDB();
+// db.initDB();
 db.testConnection();
 
 app.use(morgan('dev', {
