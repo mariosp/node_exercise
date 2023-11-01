@@ -1,8 +1,8 @@
 const readXlsxFile = require('read-excel-file/node');
 const path = require('path');
+const { getSequelize } = require('../../config/db');
 const { createUsers } = require('./user');
 const { createMessages } = require('./message');
-const { throws } = require('assert');
 
 const readExcelFile = async (fileName) => {
     const filePath = path.resolve(__dirname,`../../../${fileName}`);
@@ -27,11 +27,14 @@ const readExcelFile = async (fileName) => {
     }
 };
 
+const dropTables = async () =>{
+    return await getSequelize().drop();
+}
+
 const mapToUserModel = (array)=>{
     const users = [];
     array.forEach(columns => {
         users.push({
-            id: columns[0],
             firstname: columns[1],
             lastname: columns[2],
             birthday: columns[3],
@@ -46,7 +49,6 @@ const mapToMessageModel = (array)=>{
     const messages = [];
     array.forEach(columns => {
         messages.push({
-            id: columns[0],
             content: columns[1],
             sender: columns[2],
             receiver: columns[3],
@@ -57,4 +59,4 @@ const mapToMessageModel = (array)=>{
     return messages
 };
 
-module.exports = { readExcelFile }
+module.exports = { readExcelFile, dropTables }

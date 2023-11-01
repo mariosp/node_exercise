@@ -1,6 +1,11 @@
 const Message = require('../models/messageModel');
 const { getSequelize } = require('../../config/db');
 
+const createMessage = async (message)=> {
+    return await Message.create(message);
+};
+
+
 const createMessages = async (messages)=> {
     const results = await getSequelize().transaction(async (t) => {
         const messagesResult = [];
@@ -12,4 +17,4 @@ const createMessages = async (messages)=> {
     return results;
 }
 
-module.exports = {createMessages};
+module.exports = {createMessages, createMessage};

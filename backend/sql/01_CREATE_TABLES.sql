@@ -17,6 +17,6 @@ CREATE TABLE IF NOT EXISTS messages (
    sender INTEGER NOT NULL REFERENCES users(id),
    receiver INTEGER NOT NULL REFERENCES users(id),
    seen BOOLEAN DEFAULT false NOT NULL,
-   timestampSent TIMESTAMP NOT NULL DEFAULT current_timestamp
+   timestampSent TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 

@@ -36,7 +36,6 @@ const Message = getSequelize().define('Message', {
     },
     timestampsent: {
         type: DataTypes.DATE,
-        allowNull: false,
     },
 }, {tableName: 'messages', timestamps: false});
 
