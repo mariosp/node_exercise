@@ -1,5 +1,6 @@
 const { DataTypes, Sequelize } = require('sequelize');
 const { getSequelize } = require('../../config/db');
+const User = require('./userModel');
 
 const Message = getSequelize().define('Message', {
     id: {
@@ -38,5 +39,10 @@ const Message = getSequelize().define('Message', {
         type: DataTypes.DATE,
     },
 }, {tableName: 'messages', timestamps: false});
+
+// console.log(User);
+// console.log(Message);
+// Message.belongsTo(User);
+// Message.belongsTo(User, { foreignKey: 'receiver' });
 
 module.exports = Message;

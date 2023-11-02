@@ -1,5 +1,6 @@
 const { DataTypes } = require('sequelize');
 const { getSequelize } = require('../../config/db');
+const Message = require('./messageModel');
 
 const User = getSequelize().define('User', {
     id: {
@@ -31,5 +32,11 @@ const User = getSequelize().define('User', {
         unique: true,
     },
 }, {tableName: 'users', timestamps: false});
+
+console.log(Message)
+User.hasMany(Message, { foreignKey: 'sender' });
+User.hasMany(Message, { foreignKey: 'receiver' });
+// Message.belongsTo(User, { foreignKey: 'sender' });
+// Message.belongsTo(User, { foreignKey: 'receiver' });
 
 module.exports = User;

@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const {searchUsers, createUser} = require('../services/user');
+const {searchUsers, createUser, getUserConversations} = require('../services/user');
 
 router.post('/', async (req, res) => {
     try {
@@ -19,5 +19,16 @@ router.post('/search', async (req, res) => {
         res.status(400).json({error: err.toString()});
     }
 });
+
+router.get('/:id/user-conversations', async (req, res) => {
+    try {
+        const id = req.params['id'];
+        const result = await getUserConversations(id);
+        res.status(200).json(result);
+    } catch (err){
+        res.status(400).json({error: err.toString()});
+    }
+});
+
 
 module.exports = router;
