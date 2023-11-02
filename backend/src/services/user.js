@@ -2,7 +2,7 @@ const User = require('../models/userModel');
 const { getSequelize } = require('../../config/db');
 
 const createUser = (user) => {
-
+  return User.create(user);
 };
 
 const createUsers = async (users)=> {
@@ -16,4 +16,12 @@ const createUsers = async (users)=> {
    return result;
 }
 
-module.exports = { createUsers };
+const searchUsers = (userCriteria) => {
+  return User.findAll({
+    where: {
+      ...userCriteria,
+    }
+  });
+}
+
+module.exports = { createUsers, searchUsers, createUser };
