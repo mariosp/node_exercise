@@ -3,6 +3,15 @@ const { getSequelize } = require('../../config/db');
 const Message = require('./../models/messageModel');
 const { Op } = require('sequelize');
 
+const getUserByUsername = async (username) => {
+  const results = await searchUsers({username});
+  if(results.length) {
+    return results[0]
+  } else {
+    throw new Error("Usename not found");
+  };
+};
+
 const createUser = (user) => {
   return User.create(user);
 };
@@ -39,6 +48,7 @@ const getUserConversations = (userId) => {
     order: [[Message, 'timestampsent', 'DESC']],
 });
 }
+
 const searchUsers = (userCriteria) => {
   return User.findAll({
     where: {
@@ -47,4 +57,4 @@ const searchUsers = (userCriteria) => {
   });
 }
 
-module.exports = { createUsers, searchUsers, createUser, getUserConversations };
+module.exports = { createUsers, searchUsers, createUser, getUserConversations, getUserByUsername };

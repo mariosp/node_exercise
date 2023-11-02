@@ -1,6 +1,16 @@
 const express = require('express');
 const router = express.Router();
-const {searchUsers, createUser, getUserConversations} = require('../services/user');
+const {searchUsers, createUser, getUserConversations, getUserByUsername} = require('../services/user');
+
+router.get('/:username', async (req, res) => {
+    try {
+        const result = await getUserByUsername(req.params['username']);
+        res.status(200).json(result);
+    } catch (err){
+        res.status(400).json({error: err.toString()});
+    }
+});
+
 
 router.post('/', async (req, res) => {
     try {
