@@ -1,9 +1,14 @@
 .wrapper {
-    height:20rem;
+    /* height:20rem;
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
+    justify-content: space-evenly; */
     /* align-items: center; */
+    height: 30rem;
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    flex-direction: column;
 }
 
 .head {
@@ -16,9 +21,9 @@
 }
 
 .form {
-    height:10rem;
+    height: 20rem;
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-content: stretch
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: flex-start;
 }

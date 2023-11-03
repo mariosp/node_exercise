@@ -8,6 +8,6 @@
 @media only screen and (width <= 40em) {
     .wrapper {
         flex-direction: column;
-        justify-content: center
+        justify-content: center;
     }
 }
