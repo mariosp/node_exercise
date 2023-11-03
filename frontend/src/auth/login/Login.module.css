@@ -18,7 +18,10 @@
 .form {
     height:10rem;
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-content: stretch
+    flex-direction: column;
+    justify-content: space-evenly;
+    
+
+    /* flex-wrap: wrap; */
+    /* align-content: stretch */
 }
