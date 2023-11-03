@@ -1,0 +1,24 @@
+.wrapper {
+    height:20rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    /* align-items: center; */
+}
+
+.head {
+
+}
+
+.title {
+    color: var(--color-primary);
+    font-size: var(--font-side-big);
+}
+
+.form {
+    height:10rem;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: stretch
+}
