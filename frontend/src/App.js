@@ -8,19 +8,19 @@ import { Spinner } from '@chakra-ui/react';
 
 function App() {
   const navigate = useNavigate();
-  const { loading, authed } = useAuth();
+  const { authed } = useAuth();
 
   useEffect(()=>{
-    if(authed && !loading) {
+    if(authed === 'TRUE') {
       navigate('/');
-    } else if(!authed && !loading) {
+    } else if(authed === 'FALSE') {
       navigate('/auth');
     }
-  },[authed, loading]);
+  },[authed]);
 
   return (
     <div className={styles.wrapper}>
-      {loading && !authed ? 
+      {authed === 'PENDING' ? 
         <div className={styles.loader}>
           <Spinner
           className=""

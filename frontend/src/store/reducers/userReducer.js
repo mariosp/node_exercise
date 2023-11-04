@@ -2,7 +2,7 @@ import { LOGIN_USER_SUCCESS, LOGIN_USER_FAIL, LOGIN_USER_LOADING, CREATE_USER_LO
 
 export const userReducer = (state = {
     loginLoading: false,
-    loginError: null,
+    loginError: false,
     user: null,
     createLoading: false,
     createError: null,

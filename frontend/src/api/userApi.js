@@ -1,15 +1,21 @@
-const USER_API = process.env.REACT_APP_NOT_SECRET_CODE || 'http://localhost:3000';
+import { API_URL } from '../utils/config';
 
 export const getUserByUsername = username => {
-    return fetch(USER_API + '/user/'+ username);
+    return fetch(API_URL + '/user/'+ username);
 }
 
 export const createUser = (userObject)=>{
-    return fetch(USER_API + '/user/', {
+    return fetch(API_URL + '/user/', {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
         },
         body: JSON.stringify(userObject),
+    });
+}
+
+export const getUserConversations = (userId)=>{
+    return fetch(API_URL + `/user/${userId}/user-conversations`, {
+        method: "GET",
     });
 }
