@@ -1,4 +1,4 @@
-import { LOGIN_USER_SUCCESS, LOGIN_USER_FAIL, LOGIN_USER_LOADING, CREATE_USER_LOADING, CREATE_USER_SUCCESS, CREATE_USER_FAIL  } from "../actions/userAction";
+import { LOGIN_USER_SUCCESS, LOGIN_USER_FAIL, LOGIN_USER_LOADING, CREATE_USER_LOADING, CREATE_USER_SUCCESS, CREATE_USER_FAIL,LOGOUT_USER } from "../actions/userAction";
 
 export const userReducer = (state = {
     loginLoading: false,
@@ -45,6 +45,11 @@ export const userReducer = (state = {
                 ...state,
                 createError: action.data,
                 createLoading: false,
+            }
+        case LOGOUT_USER:
+            return {
+                ...state,
+                user: null
             }
       default:
         return state

@@ -1,0 +1,15 @@
+.container {
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+}
+
+.conversations {
+    width: 30%;
+}
+
+.messages {
+    width: 70%;
+}

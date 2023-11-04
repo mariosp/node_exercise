@@ -8,12 +8,20 @@ export const CREATE_USER_LOADING = 'CREATE_USER_LOADING';
 export const CREATE_USER_SUCCESS = 'CREATE_USER_SUCCESS';
 export const CREATE_USER_FAIL = 'CREATE_USER_FAIL';
 
+export const LOGOUT_USER = 'LOGOUT_USER';
+
 export const userLoginAction = (username)=> {
     return getUserByUsernameMiddleware(username);
 }
 
 export const createUserAction = (userObj) => {
     return createUserMiddleware(userObj);
+}
+
+export const userLogoutAction =  () => {
+    return {
+        type: LOGOUT_USER,
+    };
 }
 
 const userLoginLoading = (isLoading)=> {

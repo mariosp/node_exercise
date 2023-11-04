@@ -20,7 +20,7 @@ function App() {
 
   return (
     <div className={styles.wrapper}>
-      {loading ? 
+      {loading && !authed ? 
         <div className={styles.loader}>
           <Spinner
           className=""
