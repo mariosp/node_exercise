@@ -22,6 +22,8 @@ const updateMessage = (id, message) => {
         where: {
             id
         },
+        returning: true,
+        plain: true
     });
 }
 

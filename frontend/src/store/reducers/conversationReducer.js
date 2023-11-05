@@ -1,4 +1,4 @@
-import { CONVERSATIONS_SUCCESS, CONVERSATIONS_FAIL, CONVERSATIONS_LOADING, SELECTED_CONVERSATION_LOADING, SELECTED_CONVERSATION_SUCCESS, SELECTED_CONVERSATION_FAIL, CREATE_MESSAGE_LOADING, CREATE_MESSAGE_SUCCESS, CREATE_MESSAGE_FAIL } from "../actions/conversationsAction"
+import { CONVERSATIONS_SUCCESS, CONVERSATIONS_FAIL, CONVERSATIONS_LOADING, SELECTED_CONVERSATION_LOADING, SELECTED_CONVERSATION_SUCCESS, SELECTED_CONVERSATION_FAIL, CREATE_MESSAGE_LOADING, CREATE_MESSAGE_SUCCESS, CREATE_MESSAGE_FAIL, UPDATE_MESSAGE_SUCCESS, UPDATE_MESSAGE_FAIL } from "../actions/conversationsAction"
 
 
 export const conversationsReducer = (state = {
@@ -10,6 +10,7 @@ export const conversationsReducer = (state = {
     selectedConversationError: null,
     createMessageLoading: false,
     createMessageError: null,
+    updateMessageError: null,
 }, action) => {
     switch (action.type) {
         case CONVERSATIONS_LOADING:
@@ -55,7 +56,7 @@ export const conversationsReducer = (state = {
               createMessageLoading: true,
           }
         case CREATE_MESSAGE_SUCCESS:
-          const newList = state.selectedConversationList.concat(action.data);
+          const newList = [{...action.data}, ...state.selectedConversationList];
           return {
               ...state,
               createMessageLoading: false,
@@ -63,12 +64,25 @@ export const conversationsReducer = (state = {
               createMessageError: null,
           } 
         case CREATE_MESSAGE_FAIL:
-        return {
-            ...state,
-            createMessageLoading: false,
-            createMessageError: action.data,
-            createMessageError: null,
-        }
+          return {
+              ...state,
+              createMessageLoading: false,
+              createMessageError: action.data,
+              createMessageError: null,
+          }
+        case UPDATE_MESSAGE_SUCCESS:
+          const index = state.selectedConversationList.findIndex(item=> item.id === action.data.id);
+          const updatedList = state.selectedConversationList.toSplice(index, 1, action.data);
+          return {
+              ...state,
+              selectedConversationList: updatedList,
+              updateMessageError: null,
+          }
+          case UPDATE_MESSAGE_FAIL:
+            return {
+                ...state,
+                updateMessageError: action.data,
+            }
       default:
         return state
     }

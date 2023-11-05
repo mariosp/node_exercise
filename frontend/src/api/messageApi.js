@@ -13,3 +13,13 @@ export const createMessage = (messageObj)=>{
         body: JSON.stringify(messageObj),
     });
 }
+
+export const updateMessage = (messageId, messageObj = {})=>{
+    return fetch(API_URL + `/message/${messageId}`, {
+        method: "PATCH",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(messageObj),
+    });
+}

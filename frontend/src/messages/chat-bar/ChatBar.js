@@ -35,7 +35,7 @@ export const ChatBar = ()=>{
                      }}
                 />
                 <IconButton
-                    isDisabled={isLoading}
+                    isDisabled={isLoading || !value}
                     isLoading={isLoading}
                     onClick={handleClick}
                     className={styles.button}

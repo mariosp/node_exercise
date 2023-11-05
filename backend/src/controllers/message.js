@@ -13,8 +13,8 @@ router.post('/', async (req, res) => {
 
 router.patch('/:id', async (req, res) => {
     try {
-        await updateMessage(req.params['id'], req.body);
-        res.status(200).json({description: "Updated"});
+        const message = await updateMessage(req.params['id'], req.body);
+        res.status(200).json(message[1]);
     } catch (err){
         res.status(400).json({error: err.toString()})
     }

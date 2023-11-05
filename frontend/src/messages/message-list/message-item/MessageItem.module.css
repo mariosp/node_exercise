@@ -1,0 +1,23 @@
+.wrapper{
+    
+}
+
+.speech {
+    font-size: 1.1em;
+    color: #fff;
+    position: relative;
+    padding: 1em;
+    border-radius: 10px;
+    margin: 0.5em 1em;
+    max-width: 15em;
+}
+
+.left{
+    align-self: start;
+    background: teal;
+}
+
+.right {
+    align-self: end;
+    background: #F97171;
+}

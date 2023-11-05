@@ -1,5 +1,5 @@
 import { getUserConversations } from '../../api/userApi';
-import { getUserConversation, createMessage } from '../../api/messageApi';
+import { getUserConversation, createMessage, updateMessage } from '../../api/messageApi';
 import { setSelectedUserAction } from '../actions/userAction';
 
 export const CONVERSATIONS_LOADING = 'CONVERSATIONS_LOADING';
@@ -15,6 +15,9 @@ export const CREATE_MESSAGE_LOADING = 'CREATE_MESSAGE_LOADING';
 export const CREATE_MESSAGE_SUCCESS = 'CREATE_MESSAGE_SUCCESS';
 export const CREATE_MESSAGE_FAIL = 'CREATE_MESSAGE_FAIL';
 
+export const UPDATE_MESSAGE_SUCCESS = 'UPDATE_MESSAGE_SUCCESS';
+export const UPDATE_MESSAGE_FAIL = 'UPDATE_MESSAGE_FAIL';
+
 
 export const fetchConversationsAction = ()=> {
     return fetchConversationsMiddleware();
@@ -26,6 +29,10 @@ export const  selectedConversationAction = (selectedId)=> {
 
 export const  createMessageAction = (message)=> {
   return createMessageMiddleware(message);
+}
+
+export const  updateMessageAction = (messageId, messageObj)=> {
+  return updateMessageMiddleware(messageId, messageObj);
 }
 
 const selectedConversationLoading = (isLoading)=>({
@@ -68,7 +75,17 @@ const createMessageSuccess = (messageObj) => ({
 });
 
 const createMessageFail = (message) => ({
-  type: CREATE_MESSAGE_SUCCESS,
+  type: CREATE_MESSAGE_FAIL,
+  data: message,
+});
+
+const updateMessageSuccess = (messageObj) => ({
+  type: UPDATE_MESSAGE_SUCCESS,
+  data: messageObj,
+});
+
+const updateMessageFail = (message) => ({
+  type: UPDATE_MESSAGE_FAIL,
   data: message,
 });
 
@@ -137,6 +154,25 @@ const createMessageMiddleware = (message) =>{
       dispatch(createMessageSuccess(message));
     } catch (err) {
       dispatch(createMessageFail(err.message));
+    }
+  }
+}
+
+const updateMessageMiddleware = (messageId, messageObj) =>{
+  return async (dispatch, getState) => {
+    
+    try {
+      const message = await updateMessage(messageId, messageObj).then(async response=> {
+          if (response.ok) {
+              return response.json();
+          }
+          const errorRepsonse = await response.json();
+          throw (errorRepsonse.error);
+      });
+      
+      dispatch(updateMessageSuccess(message));
+    } catch (err) {
+      dispatch(updateMessageFail(err.message));
     }
   }
 }
