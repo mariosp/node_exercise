@@ -11,7 +11,6 @@ return (
         <div className={styles.profile}>
             <Profile/>
         </div>
-        <Divider/>
         <div className={styles.add}>
             <AddConversation />
         </div>

@@ -12,4 +12,6 @@
 
 .messages {
     width: 70%;
+    max-height: 100%;
+    height: 100%;
 }

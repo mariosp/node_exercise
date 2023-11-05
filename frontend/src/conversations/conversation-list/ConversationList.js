@@ -8,7 +8,7 @@ import { Text } from '@chakra-ui/react'
 export const ConversationList = () => {
     const dispatch = useDispatch();
     const conversationsList = useSelector(state=> state.conversations['items']);
-    const selectedUserId = useSelector(state=> state.user['selectedUser'].id);
+    const {id: selectedUserId} = useSelector(state=> state.user['selectedUser']) || {};
 
     useEffect(()=> {
         dispatch(fetchConversationsAction());
