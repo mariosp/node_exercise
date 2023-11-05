@@ -22,3 +22,12 @@ export const getUserConversations = (userId)=>{
         method: "GET",
     });
 }
+
+export const fetchUsers = () =>{
+    return fetch(API_URL + '/user/search', {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+    });
+}

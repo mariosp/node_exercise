@@ -1,4 +1,4 @@
-import { getUserByUsername, createUser } from '../../api/userApi';
+import { getUserByUsername, createUser, fetchUsers } from '../../api/userApi';
 
 export const LOGIN_USER_LOADING = 'LOGIN_USER_LOADING';
 export const LOGIN_USER_SUCCESS = 'LOGIN_USER_SUCCESS';
@@ -10,8 +10,18 @@ export const CREATE_USER_FAIL = 'CREATE_USER_FAIL';
 
 export const LOGOUT_USER = 'LOGOUT_USER';
 
+export const USERS_LOADING = 'USERS_LOADING';
+export const USERS_SUCCESS = 'USERS_SUCCESS';
+export const USERS_FAIL = 'USERS_FAIL';
+
+export const SET_SELECTED_USER = 'SET_SELECTED_USER';
+
 export const userLoginAction = (username)=> {
     return getUserByUsernameMiddleware(username);
+}
+
+export const fetchUsersAction =  () => {
+    return fetchUsersMiddleware();
 }
 
 export const createUserAction = (userObj) => {
@@ -23,6 +33,11 @@ export const userLogoutAction =  () => {
         type: LOGOUT_USER,
     };
 }
+
+export const setSelectedUserAction = (id) => ({
+    type: SET_SELECTED_USER,
+    data: id
+});
 
 const userLoginLoading = (isLoading)=> {
     return {
@@ -58,6 +73,25 @@ const createUserSuccess = (userData)=> {
 const createUserFail = (message)=> {
     return {
         type: CREATE_USER_FAIL,
+        data: message,
+    };
+}
+
+const usersLoading = (isLoading)=> {
+    return {
+        type: USERS_LOADING,
+        data: isLoading,
+    };
+}
+const usersSuccess = (userData)=> {
+    return {
+        type: USERS_SUCCESS,
+        data: userData,
+    };
+}
+const usersFail = (message)=> {
+    return {
+        type: USERS_FAIL,
         data: message,
     };
 }
@@ -103,4 +137,23 @@ const createUserMiddleware = userObj => {
             dispatch(createUserFail(err.message));
         }
 }
+}
+
+const fetchUsersMiddleware = () => {
+    return async (dispatch, getState) => {
+        dispatch(usersLoading(true));
+        try {
+            const users = await fetchUsers().then(async response=> {
+                if (response.ok) {
+                    return response.json();
+                }
+                const errorRepsonse = await response.json();
+                throw (errorRepsonse.error);
+            });
+            
+            dispatch(usersSuccess(users));
+        } catch (err) {
+            dispatch(usersFail(err.messsage));
+        }
+    }
 }

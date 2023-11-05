@@ -12,7 +12,7 @@ return (
             <Profile/>
         </div>
         <Divider/>
-        <div className={styles.addConversation}>
+        <div className={styles.add}>
             <AddConversation />
         </div>
         <div className={styles.conversations}>
