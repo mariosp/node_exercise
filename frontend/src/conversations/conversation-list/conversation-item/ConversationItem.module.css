@@ -1,7 +1,15 @@
 .wrapper {
     height: 5em;
     display: flex;
+    cursor: pointer;
+}
 
+.selected {
+    background-color: #bdf9f3;
+}
+
+.wrapper:hover {
+    background-color: #ccfbf6;
 }
 
 .avatar {
