@@ -27,16 +27,15 @@ const createUsers = async (users)=> {
    return result;
 }
 
-const getUserConversations = (userId) => {
-  console.log(userId)
-  return User.findAll({
+const getUserConversations = async (userId, fields =[], limit) => {
+  const conversations = await User.findAll({
     where: {
         id: { [Op.ne]: userId },
     },
     include: [
         {
             model: Message,
-            attributes: [],
+            attributes: [...fields],
             where: {
                 [Op.or]: [
                     { sender: userId },
@@ -46,7 +45,14 @@ const getUserConversations = (userId) => {
         },
     ],
     order: [[Message, 'timestampsent', 'DESC']],
-});
+  });
+
+  return !limit? conversations : conversations.map(conv=> conv.toJSON()).map(conv=> {
+    return {
+      ...conv,
+      Messages: { ...conv.Messages[0] },
+    }
+  });
 }
 
 const searchUsers = (userCriteria) => {

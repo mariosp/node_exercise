@@ -1,0 +1,40 @@
+.wrapper {
+    height: 5em;
+    display: flex;
+
+}
+
+.avatar {
+    width: 20%;
+    margin: auto;
+    text-align: center;
+}
+
+.info {
+    width: 70%;
+    margin: auto;
+    padding: 1em;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.info > p {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.status {
+    width: 10%;
+    margin: auto;
+    text-align: center;
+}
+
+.dot {
+    height: 1em;
+    width: 1em;
+    background-color: teal;
+    border-radius: 50%;
+    display: inline-block;
+}

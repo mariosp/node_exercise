@@ -15,7 +15,10 @@ export const createUser = (userObject)=>{
 }
 
 export const getUserConversations = (userId)=>{
-    return fetch(API_URL + `/user/${userId}/user-conversations`, {
+    return fetch(API_URL + `/user/${userId}/user-conversations?` + new URLSearchParams({
+      fields: 'content,seen',
+      limit: 'true',  
+    }), {
         method: "GET",
     });
 }

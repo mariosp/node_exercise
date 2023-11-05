@@ -32,7 +32,11 @@ router.post('/search', async (req, res) => {
 router.get('/:id/user-conversations', async (req, res) => {
     try {
         const id = req.params['id'];
-        const result = await getUserConversations(id);
+        let fields = req.query['fields'];
+        fields = fields && fields.split(',');
+        let limit = req.query['limit'];
+        limit = !!limit;
+        const result = await getUserConversations(id, fields, limit);
         res.status(200).json(result);
     } catch (err){
         res.status(400).json({error: err.toString()});
