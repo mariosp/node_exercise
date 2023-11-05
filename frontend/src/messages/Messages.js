@@ -2,6 +2,7 @@ import { useSelector } from 'react-redux';
 import styles from './Messages.module.css';
 import { Text } from '@chakra-ui/react';
 import { Header } from './header/Header';
+import { ChatBar } from './chat-bar/ChatBar';
 
 
 export const Messages = ()=>{
@@ -17,6 +18,7 @@ export const Messages = ()=>{
                 <div className={styles.messages}>
                 </div>
                 <div className={styles.chat}>
+                    <ChatBar key={selectedUser.id} selectedUserId={selectedUser.id} />
                 </div>
             </> :
             <Text className={styles.empty} color='teal' fontSize='2xl'>Select conversation</Text>
