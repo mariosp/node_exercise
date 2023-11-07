@@ -23,3 +23,12 @@ export const updateMessage = (messageId, messageObj = {})=>{
         body: JSON.stringify(messageObj),
     });
 }
+
+export const updateMessageAsRead = (userId, selectedId) =>{
+    return fetch(API_URL + `/message/conversation/${userId},${selectedId}/mark-as-read`, {
+        method: "PATCH",
+        headers: {
+            "Content-Type": "application/json",
+        }
+    });
+}

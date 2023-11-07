@@ -1,5 +1,5 @@
 import { getUserConversations } from '../../api/userApi';
-import { getUserConversation, createMessage, updateMessage } from '../../api/messageApi';
+import { getUserConversation, createMessage, updateMessage, updateMessageAsRead } from '../../api/messageApi';
 import { setSelectedUserAction } from '../actions/userAction';
 
 export const CONVERSATIONS_LOADING = 'CONVERSATIONS_LOADING';
@@ -123,7 +123,7 @@ const fetchSelectedConversationMiddleware = (selectedId) => {
               const errorRepsonse = await response.json();
               throw (errorRepsonse.error);
           });
-          
+          updateMessageAsRead(userId, selectedId);
           dispatch(selectedConversationSuccess(conversation));
         } catch (err) {
           dispatch(selectedConversationFail(err.message));

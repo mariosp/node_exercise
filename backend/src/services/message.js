@@ -49,4 +49,14 @@ const getConversationOrderByRecent = (id1, id2) => {
     });
 }
 
-module.exports = {createMessages, createMessage , updateMessage, searchMessages, getConversationOrderByRecent};
+const markMessagesAsRead = (id1, id2) => {
+    return Message.update({seen: true}, {
+        where:{
+            sender: id2,
+            receiver: id1,
+            seen: false,
+        },
+    });
+}
+
+module.exports = {markMessagesAsRead, createMessages, createMessage , updateMessage, searchMessages, getConversationOrderByRecent};

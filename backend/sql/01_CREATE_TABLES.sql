@@ -7,10 +7,6 @@ CREATE TABLE IF NOT EXISTS users (
    username VARCHAR(20) UNIQUE NOT NULL
 );
 
--- ALTER TABLE users 
---    ADD CONSTRAINT check_gender 
---    CHECK (gender = 'N/A' OR gender = 'Female' OR gender = 'Male');
-
 CREATE TABLE IF NOT EXISTS messages (
    id SERIAL PRIMARY KEY,
    content VARCHAR (255) NOT NULL,

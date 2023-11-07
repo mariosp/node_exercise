@@ -37,10 +37,10 @@ const getUserConversations = async (userId, fields =[], limit) => {
             model: Message,
             attributes: [...fields],
             where: {
-                [Op.or]: [
-                    { sender: userId },
-                    { receiver: userId },
-                ],
+              [Op.or]: [
+                  { sender: userId },
+                  { receiver: userId },
+              ],
             },
         },
     ],
