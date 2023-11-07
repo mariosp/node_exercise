@@ -21,3 +21,14 @@
     align-self: end;
     background: #F97171;
 }
+
+.dot {
+    height: 0.5em;
+    width: 0.5em;
+    background-color: teal;
+    border-radius: 50%;
+    display: inline-block;
+    position: absolute;
+    left: 103%;
+    bottom: 5%;
+}

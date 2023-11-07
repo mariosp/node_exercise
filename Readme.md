@@ -162,7 +162,7 @@ User resources
 <details>
  <summary>
       <code>POST</code> <code><b>/search</b></code> 
-      <code>(Search user by user criteria)</code>
+      <code>(Search user)</code>
 </summary>
 
 ##### Request body (json)

@@ -25,7 +25,7 @@ export const ChatBar = ()=>{
                 <Textarea
                     isDisabled={isLoading}
                     value={value}
-                    onChange={e=>setValue(e.target.value)}
+                    onChange={e=>setValue(e.target.value?.replace(/[\r\n]/gm, ''))}
                     placeholder='Type your message'
                     size='md'
                     onKeyUp={e=> {

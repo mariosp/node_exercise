@@ -27,7 +27,8 @@ export const MessageList = () => {
        }
     };
 
-    const renderList = messages.map(message => <MessageItem key={message.id + message.content} message={message} owner={userId === message.sender} handleEdit={handleEdit}/>)
+    const findOwnerMessageRead = messages.find(message=> message.sender === userId && message.seen === true);
+    const renderList = messages.map(message => <MessageItem key={message.id + message.content} message={message} owner={userId === message.sender} showRead={message.id === findOwnerMessageRead.id} handleEdit={handleEdit}/>)
 
     return (
         <div className={styles.container}>
