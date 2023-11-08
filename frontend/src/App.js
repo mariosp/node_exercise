@@ -16,11 +16,11 @@ function App() {
     } else if(authed === 'FALSE') {
       navigate('/auth');
     }
-  },[authed]);
+  },[authed, navigate]);
 
   return (
     <div className={styles.wrapper}>
-      {authed === 'PENDING' ? 
+      {authed === 'PENDING' &&
         <div className={styles.loader}>
           <Spinner
           className=""
@@ -31,12 +31,15 @@ function App() {
             size='xl'
           />
         </div>
-        :
-        <Routes>
-          <Route path="/" element={<Dashboard/>}></Route>
-          <Route path="/auth" element={<Auth/>}></Route>
-        </Routes>
       }
+      <Routes>
+      {authed === 'FALSE' && 
+        <Route path="/auth" element={<Auth/>}></Route>
+      }
+      {authed === 'TRUE' && 
+         <Route path="/" element={<Dashboard/>}></Route>
+      }
+      </Routes>
     </div>
   );
 }

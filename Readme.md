@@ -3,6 +3,13 @@
 In order to run application use:
       `docker-compose up`
 
+
+backend: http://localhost:3000
+frontend: http://localhost:3001
+
+To start you can seed your database with helper/seedDB
+
+
 ------------------------------------------------------------------------------------------
 ## RESTAPI Docs
 ## Helper collection [/helper]
