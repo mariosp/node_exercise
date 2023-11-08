@@ -6,7 +6,7 @@ import { ChatBar } from './chat-bar/ChatBar';
 import { MessageList } from './message-list/MessageList';
 
 
-export const Messages = ()=>{
+export const Messages = ({close})=>{
     const selectedUser = useSelector(state=> state.user['selectedUser']);
 
     return (
@@ -14,7 +14,7 @@ export const Messages = ()=>{
         {selectedUser? 
             <>
                 <div className={styles.header}>
-                    <Header firstname={selectedUser.firstname} lastname={selectedUser.lastname}/>
+                    <Header firstname={selectedUser.firstname} lastname={selectedUser.lastname} close={close}/>
                 </div>
                 <div className={styles.messages}>
                     <MessageList />
