@@ -18,6 +18,8 @@ export const CREATE_MESSAGE_FAIL = 'CREATE_MESSAGE_FAIL';
 export const UPDATE_MESSAGE_SUCCESS = 'UPDATE_MESSAGE_SUCCESS';
 export const UPDATE_MESSAGE_FAIL = 'UPDATE_MESSAGE_FAIL';
 
+export const RESET_STATE = 'RESET_STATE';
+
 
 export const fetchConversationsAction = ()=> {
     return fetchConversationsMiddleware();
@@ -88,6 +90,10 @@ const updateMessageFail = (message) => ({
   type: UPDATE_MESSAGE_FAIL,
   data: message,
 });
+
+export const resetConversatonStateAction = () => ({
+  type: RESET_STATE,
+})
 
 const fetchConversationsMiddleware = () => {
     return async (dispatch, getState) => {

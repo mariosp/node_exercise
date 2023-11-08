@@ -1,6 +1,6 @@
 import { LOGIN_USER_SUCCESS, LOGIN_USER_FAIL, LOGIN_USER_LOADING, CREATE_USER_LOADING, CREATE_USER_SUCCESS, CREATE_USER_FAIL,LOGOUT_USER, USERS_LOADING, USERS_SUCCESS, USERS_FAIL, SET_SELECTED_USER } from "../actions/userAction";
 
-export const userReducer = (state = {
+const initState = {
     loginLoading: false,
     loginError: false,
     user: null,
@@ -10,7 +10,9 @@ export const userReducer = (state = {
     usersLoading: false,
     usersError: null,
     selectedUser: null,
-}, action) => {
+};
+
+export const userReducer = (state = initState, action) => {
     switch (action.type) {
         case LOGIN_USER_SUCCESS:
             return {
@@ -71,8 +73,7 @@ export const userReducer = (state = {
             }
         case LOGOUT_USER:
             return {
-                ...state,
-                user: null
+                ...initState
             }
         case SET_SELECTED_USER:
             return {

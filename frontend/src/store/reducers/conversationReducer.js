@@ -1,17 +1,18 @@
-import { CONVERSATIONS_SUCCESS, CONVERSATIONS_FAIL, CONVERSATIONS_LOADING, SELECTED_CONVERSATION_LOADING, SELECTED_CONVERSATION_SUCCESS, SELECTED_CONVERSATION_FAIL, CREATE_MESSAGE_LOADING, CREATE_MESSAGE_SUCCESS, CREATE_MESSAGE_FAIL, UPDATE_MESSAGE_SUCCESS, UPDATE_MESSAGE_FAIL } from "../actions/conversationsAction"
+import { CONVERSATIONS_SUCCESS, CONVERSATIONS_FAIL, CONVERSATIONS_LOADING, SELECTED_CONVERSATION_LOADING, SELECTED_CONVERSATION_SUCCESS, SELECTED_CONVERSATION_FAIL, CREATE_MESSAGE_LOADING, CREATE_MESSAGE_SUCCESS, CREATE_MESSAGE_FAIL, UPDATE_MESSAGE_SUCCESS, UPDATE_MESSAGE_FAIL, RESET_STATE } from "../actions/conversationsAction"
 
+const initState = {
+  items: [],
+  initLoading: true,
+  error: null,
+  selectedConversationList: [],
+  selectedConversationLoading: false,
+  selectedConversationError: null,
+  createMessageLoading: false,
+  createMessageError: null,
+  updateMessageError: null,
+}
 
-export const conversationsReducer = (state = {
-    items: [],
-    initLoading: true,
-    error: null,
-    selectedConversationList: [],
-    selectedConversationLoading: false,
-    selectedConversationError: null,
-    createMessageLoading: false,
-    createMessageError: null,
-    updateMessageError: null,
-}, action) => {
+export const conversationsReducer = (state = initState, action) => {
     switch (action.type) {
         case CONVERSATIONS_LOADING:
           return {
@@ -78,11 +79,15 @@ export const conversationsReducer = (state = {
               selectedConversationList: updatedList,
               updateMessageError: null,
           }
-          case UPDATE_MESSAGE_FAIL:
-            return {
-                ...state,
-                updateMessageError: action.data,
-            }
+        case UPDATE_MESSAGE_FAIL:
+          return {
+              ...state,
+              updateMessageError: action.data,
+          }
+        case RESET_STATE:
+          return {
+            ...initState,
+          }
       default:
         return state
     }
