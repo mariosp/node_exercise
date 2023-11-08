@@ -115,7 +115,8 @@ User resources
 
 ##### Example
 
-> 
+> http://localhost:3000/user/1/user-conversations
+>
 >  http://localhost:3000/user/1/user-conversations?fields=seen,content&limit=true
 >
 
